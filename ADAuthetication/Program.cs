@@ -17,6 +17,7 @@ namespace ADAuthetication
 
             Searcher.SearchScope = SearchScope.Subtree;
             Searcher.ReferralChasing = ReferralChasingOption.All;
+
             Searcher.Filter = "(&(objectClass=user)(sAMAccountName=" + username + "))";
             try
             {
@@ -25,13 +26,16 @@ namespace ADAuthetication
                 if (Results != null)
                 {
                     string nombreCompleto = Results.GetDirectoryEntry().Properties["DisplayName"].Value.ToString();
+
                     string email = Results.GetDirectoryEntry().Properties["mail"].Value.ToString();
 
-                    Console.WriteLine("Su nombre es {0}  y tu correo es {1}", nombreCompleto, email);
+
+
+                    Console.WriteLine("Su nombre es {0} y tu correo es {1}", nombreCompleto, email);
                 }
                 else
                 {
-                    Console.WriteLine("Error, no encontrado");
+                    Console.WriteLine("Error,usuario no encontrado");
                 }
             }
             catch (Exception ex)
